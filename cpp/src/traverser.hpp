@@ -383,7 +383,7 @@ class Traverser {
     //------------------------------------------------------------------------
     // Types
     //------------------------------------------------------------------------
-    void traverse(const clang::QualType &type, int depth) { traverse(type.getTypePtr(), depth); }
+    void traverse(const clang::QualType &type, int depth) { traverse(type.getTypePtrOrNull(), depth); }
     void traverse(const clang::Type *type, int depth) {
         if (!type) {
             return;
