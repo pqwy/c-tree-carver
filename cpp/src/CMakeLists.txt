@@ -43,7 +43,7 @@
 cmake_minimum_required(VERSION 3.16.3)
 project(clang-tree-carver)
 
-find_package(LLVM "15.0.7" REQUIRED CONFIG)
+find_package(LLVM "21.1" REQUIRED CONFIG)
 message("LLVM Libraries: ${LLVM_LIBRARY_DIRS}")
 # For some reason, ClangConfig.cmake isn't versioned, and so if there are 
 # multiple ones on the system, it may pick the wrong one, hence the below hint.

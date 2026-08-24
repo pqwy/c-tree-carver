@@ -89,7 +89,7 @@ pKVM, without having to support irrelevant C constructs.
 ### Prerequisites
 
 - C++ 17 compiler
-- LLVM/Clang 15.0.7 (see CI workflow)
+- LLVM/Clang 21.1 (see CI workflow)
 - CMake >= 3.16.3
 - OCaml & Libraries (see opam file)
 

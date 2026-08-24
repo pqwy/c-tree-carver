@@ -337,7 +337,7 @@ class Traverser {
     void down_casted(const clang::DesignatedInitExpr *expr, int depth) {
         for (const auto child : expr->designators()) {
             if (child.isFieldDesignator()) {
-                traverse(child.getField(), depth + 1);
+                traverse(child.getFieldDecl(), depth + 1);
             }
         }
     }
@@ -432,7 +432,7 @@ class Traverser {
         traverse(type->getModifiedType(), depth);
     }
     void down_casted(const clang::TypeOfType *type, int depth) {
-        traverse(type->getUnderlyingType(), depth);
+        traverse(type->getUnmodifiedType(), depth);
     }
     void down_casted(const clang::FunctionProtoType *type, int depth) {
         for (const auto paramType : type->param_types()) {
@@ -469,7 +469,7 @@ class Traverser {
         const auto t = type->getTemplateName();
         traverse(t.getAsTemplateDecl(), depth);
         // template argument
-        for (const auto &arg : *type) {
+        for (const auto &arg : type->template_arguments()) {
             traverse(arg, depth);
         }
     }
@@ -486,7 +486,6 @@ class Traverser {
     void traverse(const clang::NestedNameSpecifier *spec, int depth) {
         switch (spec->getKind()) {
         case clang::NestedNameSpecifier::TypeSpec:
-        case clang::NestedNameSpecifier::TypeSpecWithTemplate:
             traverse(spec->getAsType(), depth);
         default:
             break;

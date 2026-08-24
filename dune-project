@@ -23,7 +23,7 @@
      (ocaml (>= 4.14.1))
      conf-c++
      (conf-cmake :dev)
-     (conf-libclang (= 15))
+     (conf-libclang (= 21))
      (conf-python-3 :with-test)
      (fileutils (>= 0.6.4))
      (shexp (>= v0.15.0))
