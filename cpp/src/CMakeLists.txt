@@ -49,18 +49,24 @@ message("LLVM Libraries: ${LLVM_LIBRARY_DIRS}")
 # multiple ones on the system, it may pick the wrong one, hence the below hint.
 find_package(Clang REQUIRED CONFIG HINTS "${LLVM_LIBRARY_DIRS}/cmake")
 
-set(CLANG_LIBS
-    clangAnalysis
-    clangAST
-    clangBasic
-    clangDriver
-    clangEdit
-    clangFrontend
-    clangLex
-    clangParse
-    clangSema
-    clangSerialization
-    clangTooling)
+if(TARGET clangBasic)
+  # Static linking to sublibs. These are not always installed.
+  set(CLANG_LIBS
+      clangAnalysis
+      clangAST
+      clangBasic
+      clangDriver
+      clangEdit
+      clangFrontend
+      clangLex
+      clangParse
+      clangSema
+      clangSerialization
+      clangTooling)
+else()
+  # Dynlink to the entire Clang lib.
+  set(CLANG_LIBS clang-cpp LLVM)
+endif()
 
 include_directories(${LLVM_INCLUDE_DIRS})
 link_directories(${LLVM_LIBRARY_DIRS})
